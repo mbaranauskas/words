@@ -21,7 +21,7 @@ findWord :: Grid -> String -> Bool
 findWord = undefined
 
 findWordInLine :: String -> String -> Bool
-findWordInLine word line = word `isInfixOf` line
+findWordInLine = isInfixOf
 
 grid = [ "__C________R___"
        , "__SI________U__"
