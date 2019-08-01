@@ -18,10 +18,13 @@ outputGrid :: Grid -> IO ()
 outputGrid gr = putStrLn $formatGrid gr
 
 findWord :: Grid -> String -> Bool
-findWord = undefined
+findWord grid word = 
+    let lines = grid ++ (map reverse grid)
+    in or $ map(findWordInLine word) lines
 
 findWordInLine :: String -> String -> Bool
 findWordInLine = isInfixOf
+
 
 grid = [ "__C________R___"
        , "__SI________U__"
