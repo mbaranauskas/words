@@ -28,7 +28,7 @@ getReversedLines grid = grid ++ (map reverse grid)
 
 findWord :: Grid -> String -> Maybe String
 findWord grid word = 
-    let lines = getLines grid
+    let lines = (getLines grid) ++ (getLines $ skew grid) ++ (getLines$ skew (reverse grid))
         found =  or $ map(findWordInLine word) lines
     in if found then Just word else Nothing
 
