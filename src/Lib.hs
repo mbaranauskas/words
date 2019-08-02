@@ -6,6 +6,7 @@ module Lib
     , findWord
     , findWords
     ,findWordInLine
+    , skew
     ) where
 
 import Data.List(isInfixOf, transpose)
@@ -37,6 +38,10 @@ findWords grid words = catMaybes $ map (findWord grid) words
 findWordInLine :: String -> String -> Bool
 findWordInLine = isInfixOf
 
+skew :: Grid -> Grid
+skew [] = []
+skew (l:ls) = l : skew (map indent ls)
+    where indent line = '_' : line
 
 grid = [ "__C________R___"
        , "__SI________U__"
@@ -49,7 +54,7 @@ grid = [ "__C________R___"
        , "____L_E__T_O___"
        , "_________HB____"
        , "_________O_____"
-       , "_________CN____"
+       , "________CN_____"
        ]
 
 languages = [ "BASIC"
