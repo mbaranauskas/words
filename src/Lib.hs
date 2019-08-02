@@ -8,7 +8,7 @@ module Lib
     ,findWordInLine
     ) where
 
-import Data.List(isInfixOf)
+import Data.List(isInfixOf, transpose)
 import Data.Maybe(catMaybes)
 
 type Grid = [String]
@@ -19,9 +19,15 @@ formatGrid = unlines
 outputGrid :: Grid -> IO ()
 outputGrid gr = putStrLn $formatGrid gr
 
+getLines :: Grid -> [String]
+getLines grid = (getReversedLines grid) ++ (getReversedLines $ transpose grid)
+
+getReversedLines :: Grid -> [String]
+getReversedLines grid = grid ++ (map reverse grid)
+
 findWord :: Grid -> String -> Maybe String
 findWord grid word = 
-    let lines = grid ++ (map reverse grid)
+    let lines = getLines grid
         found =  or $ map(findWordInLine word) lines
     in if found then Just word else Nothing
 
